@@ -3,8 +3,12 @@
     margin: 0;
     box-sizing: border-box;
 }
+
 body {
-    background: rgb(143, 150, 149);
+    background: rgb(211, 214, 214);
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    text-align: center;
 }
 
 .autorise {
@@ -18,10 +22,6 @@ body {
 }
 
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-}
 
 h1 {
     text-align: center;
@@ -33,9 +33,12 @@ table {
     margin-top: 20px;
 }
 
-th, td {
+th,
+td {
     padding: 10px;
     text-align: left;
+    text-align: center;
+    border: 1px solid black;
 }
 
 th {
@@ -57,4 +60,19 @@ button {
 
 button:hover {
     background-color: #45a049;
+}
+
+.sort-arrow {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-left: 5px;
+}
+
+.sort-arrow.desc {
+    transform: rotate(180deg);
+}
+
+th[data-sortable] {
+    cursor: pointer;
 }

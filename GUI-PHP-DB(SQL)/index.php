@@ -22,7 +22,7 @@
     <label for="table-select">Choisir une table :</label>
     <select id="table-select" onchange="changeTable()">
         <option>Sélectionnez une table</option>
-        <option value="Order">Ordersaaa</option>
+        <option value="Achats">Achats</option>
         <option value="Product">Product</option>
         <option value="User">User</option>
         <option value="Order_has_Product">Order_has_Product</option>
@@ -32,20 +32,13 @@
 
     <table id="data-table">
         <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Prix</th>
-                <th>Action</th>
-            </tr>
         </thead>
         <tbody>
             <!-- Les données seront injectées ici avec PHP -->
         </tbody>
     </table>
 
-    <script src="./main.js"></script>
+    <script src="./populateTables.js"></script>
 
 </body>
 

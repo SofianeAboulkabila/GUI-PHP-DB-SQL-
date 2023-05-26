@@ -5,7 +5,7 @@ require_once './dbconnect.php';
 $tableName = $_GET['table'] ?? '';
 
 // Vérifier la validité de la table sélectionnée pour éviter les injections SQL
-$allowedTables = array("Ordersaaa", "Product", "User", "Order_has_Product");
+$allowedTables = array("Achats", "Product", "User", "Order_has_Product");
 if (!in_array($tableName, $allowedTables)) {
     header('Content-Type: application/json');
     echo json_encode(array('error' => 'Table non autorisée.'));
@@ -15,23 +15,25 @@ if (!in_array($tableName, $allowedTables)) {
 try {
     // Exécuter la requête pour récupérer les données de la table
     $query = "SELECT * FROM `$tableName`";
-    $result = $conn->query($query);
+    $statement = $conn->prepare($query);
+    $statement->execute();
 
     // Vérifier si la requête a renvoyé des résultats
-    if ($result && $result->rowCount() > 0) {
+    $rowCount = $statement->rowCount();
+    if ($rowCount > 0) {
         // Tableau pour stocker les données et les noms de colonnes
         $data = [];
         $columns = [];
 
         // Récupérer les noms de colonnes
-        $fieldCount = $result->columnCount();
+        $fieldCount = $statement->columnCount();
         for ($i = 0; $i < $fieldCount; $i++) {
-            $column = $result->getColumnMeta($i);
+            $column = $statement->getColumnMeta($i);
             $columns[] = $column['name'];
         }
 
         // Parcourir les lignes et les ajouter au tableau de données
-        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
             $data[] = $row;
         }
 
